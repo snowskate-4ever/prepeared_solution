@@ -1,5 +1,6 @@
 <script setup>
 import { useForm, Link } from "@inertiajs/vue3";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 const props = defineProps({
     publisher: {
@@ -22,8 +23,9 @@ const submit = () => {
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <AuthenticatedLayout/>
                     <Link :href="route('publishers.index')">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Назад</button>
+                        <button class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-2xl my-3">Назад</button>
                     </Link>
 
                     <form @submit.prevent="submit">
@@ -41,7 +43,7 @@ const submit = () => {
                         </div>
 
                         <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3 text-white">
+                                class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-2xl my-3 text-white">
                             Submit
                         </button>
                     </form>

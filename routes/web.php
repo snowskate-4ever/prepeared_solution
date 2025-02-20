@@ -26,3 +26,8 @@ Route::middleware([
 Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 Route::resource('/publishers', \App\Http\Controllers\PublisherController::class);
 Route::resource('/books', \App\Http\Controllers\BookController::class);
+
+Route::get('/add_publishers/{id}', [\App\Http\Controllers\BookController::class, 'add_publishers']);
+Route::put('/add_publishers/{id}', [\App\Http\Controllers\BookController::class, 'add_publishers_store']);
+Route::get('/add_authors/{id}', [\App\Http\Controllers\BookController::class, 'add_authors']);
+Route::put('/add_authors/{id}', [\App\Http\Controllers\BookController::class, 'add_authors_store']);

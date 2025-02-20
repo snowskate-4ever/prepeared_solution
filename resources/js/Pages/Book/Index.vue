@@ -2,8 +2,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     books: {
+        type: Array,
+        default: () => [],
+    },
+    authors: {
+        type: Array,
+        default: () => [],
+    },
+    publishers: {
         type: Array,
         default: () => [],
     },
@@ -39,10 +47,24 @@ const deletePost = (id) => {
                             <tr v-for="book in books" :key="book.id">
                                 <td class="border px-4 py-2">{{ book.id }}</td>
                                 <td class="border px-4 py-2">{{ book.name }}</td>
-                                <td class="border px-4 py-2">{{ book.author_id }}</td>
-                                <td class="border px-4 py-2">{{ book.publisher_id }}</td>
                                 <td class="border px-4 py-2">
-                                    <Link :href="`publishers/${book.id}/edit`">
+                                    <template v-for="author in book.authors" :key="author.id">
+                                        <div>{{ author }}</div>
+                                    </template>
+                                    <Link :href="`add_authors/${book.id}`">
+                                        <button class="bg-teal-300 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded-2xl">Добавить автора</button>
+                                    </Link>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <template v-for="publisher in book.publishers" :key="publisher.id">
+                                        <div>{{ publisher }}</div>
+                                    </template>
+                                    <Link :href="`add_publishers/${book.id}`">
+                                        <button class="bg-teal-300 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded-2xl">Добавить издательство</button>
+                                    </Link>
+                                </td>
+                                <td class="border px-4 py-2">
+                                    <Link :href="`books/${book.id}/edit`">
                                         <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-2xl">Ред</button>
                                     </Link>
                                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-2xl ml-2" @click="deletePost(book.id)">Удл</button>

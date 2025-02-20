@@ -4,9 +4,7 @@ import { useForm, Link } from "@inertiajs/vue3";
 
 const form = useForm({
     id:'',
-    name: '',
-    author_id: '',
-    publisher_id: '',
+    name: ''
 });
 
 const props = defineProps({
@@ -48,26 +46,6 @@ const submit = () => {
                                     id="name"
                                     v-model="form.name" />
 
-                            </div>
-
-                            <div class="mb-4">
-                                <label
-                                    for="author_id"
-                                    class="block text-gray-700 text-sm font-bold mb-2">
-                                    Автор:</label>
-                                <select size="3" id="author_id" v-model="form.author_id">
-                                    <option v-for="author in props.authors" :key="author.id" :value="author.id">{{ author.name }}</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-4">
-                                <label
-                                    for="publisher_id"
-                                    class="block text-gray-700 text-sm font-bold mb-2">
-                                    Издательство:</label>
-                                <select size="3" id="publisher_id" v-model="form.publisher_id">
-                                    <option v-for="publisher in props.publishers" :key="publisher.id" :value="publisher.id">{{ publisher.name }}</option>
-                                </select>
                             </div>
 
                             <button type="submit" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-2xl my-3 text-white">

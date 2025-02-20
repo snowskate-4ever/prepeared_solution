@@ -7,14 +7,18 @@ const props = defineProps({
         type: Object,
         default: null,
     },
+    publishers: {
+        type: Object,
+        default: null,
+    },
 });
 
 const form = useForm({
-    name: props.book.name
+    publishers: null
 });
 
 const submit = () => {
-    form.put(`/books/${props.book.id}`);
+    form.put(`/add_publishers/${props.book.id}`);
 };
 </script>
 
@@ -27,21 +31,22 @@ const submit = () => {
                     <Link :href="route('books.index')">
                         <button class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-2xl my-3">Назад</button>
                     </Link>
-
+                    <div>Название книги:</div>
+                    <div>{{ book.name }}</div>
+                    <div>Издательства:</div>
+                    <div v-for="publisher in props.book.publishers" :key="publisher.id">
+                        {{ publisher.name }}
+                    </div>
                     <form @submit.prevent="submit">
                         <div class="mb-4">
                             <label
-                                for="name"
+                                for="publisher_id"
                                 class="block text-gray-700 text-sm font-bold mb-2">
-                                Название книги:</label>
-                            <input
-                                type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Введите название"
-                                id="name"
-                                v-model="form.name"/>
+                                Издательство:</label>
+                            <select size="6" multiple id="publisher_id" v-model="form.publishers">
+                                <option v-for="publisher in props.publishers" :key="publisher.id" :value="publisher.id">{{ publisher.name }}</option>
+                            </select>
                         </div>
-
                         <button type="submit"
                                 class="bg-blue-300 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded-2xl my-3 text-white">
                             Сохранить
